@@ -6,7 +6,7 @@ import UIKit
 final class HomeView: UIView {
     enum Action {
         case tap(IndexPath)
-        case info(IndexPath)
+        case detail(IndexPath)
         case edit(IndexPath)
         case delete(IndexPath)
     }
@@ -218,7 +218,7 @@ extension HomeView: UICollectionViewDelegate {
                     title: "상세정보",
                     image: UIImage(systemName: "magnifyingglass")
                 ) { [weak self] _ in
-                    self?.action.accept(.info(indexPath))
+                    self?.action.accept(.detail(indexPath))
                 }
                 actions.append(info)
                 fallthrough
