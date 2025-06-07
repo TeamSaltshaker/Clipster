@@ -1,3 +1,4 @@
+import RxCocoa
 import SnapKit
 import UIKit
 
@@ -15,6 +16,8 @@ final class ClipDetailBackButton: UIView {
         label.textColor = .label
         return label
     }()
+
+    var tap: ControlEvent<Void> { backButton.rx.tap }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
