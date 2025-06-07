@@ -1,7 +1,16 @@
+import RxCocoa
+import RxSwift
 import SnapKit
 import UIKit
 
 final class HomeView: UIView {
+    enum Action {
+        case tap(IndexPath)
+        case info(IndexPath)
+        case edit(IndexPath)
+        case delete(IndexPath)
+    }
+
     enum Section: Int, CaseIterable {
         case clip
         case folder
@@ -12,6 +21,9 @@ final class HomeView: UIView {
         case folder(FolderCellDisplay)
     }
 
+    private let disposeBag = DisposeBag()
+    let action = PublishRelay<Action>()
+
     private var dataSource: UICollectionViewDiffableDataSource<Section, Item>?
 
     private lazy var collectionView: UICollectionView = {
@@ -19,6 +31,7 @@ final class HomeView: UIView {
             frame: .zero,
             collectionViewLayout: createCollectionViewLayout()
         )
+        collectionView.delegate = self
         return collectionView
     }()
 
@@ -92,11 +105,13 @@ final class HomeView: UIView {
 }
 
 private extension HomeView {
-    private func createCollectionViewLayout() -> UICollectionViewLayout {
+    func createCollectionViewLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout(
             sectionProvider: { [weak self] (index, _) -> NSCollectionLayoutSection? in
-                guard let self else { return nil }
-                guard let section = Section(rawValue: index) else { return nil }
+                guard let self,
+                      let section = Section(rawValue: index)
+                else { return nil }
+
                 return self.makeSectionLayout(for: section)
             },
             configuration: {
@@ -109,7 +124,7 @@ private extension HomeView {
         return layout
     }
 
-    private func makeSectionLayout(for section: Section) -> NSCollectionLayoutSection {
+    func makeSectionLayout(for section: Section) -> NSCollectionLayoutSection {
         let layoutSection: NSCollectionLayoutSection
 
         switch section {
@@ -125,7 +140,7 @@ private extension HomeView {
         return layoutSection
     }
 
-    private func makeClipSectionLayout() -> NSCollectionLayoutSection {
+    func makeClipSectionLayout() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
             heightDimension: .fractionalHeight(1.0)
@@ -147,7 +162,7 @@ private extension HomeView {
         return section
     }
 
-    private func makeFolderSectionLayout() -> NSCollectionLayoutSection {
+    func makeFolderSectionLayout() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
             heightDimension: .fractionalHeight(1)
@@ -158,7 +173,7 @@ private extension HomeView {
             widthDimension: .fractionalWidth(1.0),
             heightDimension: .absolute(72)
         )
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 8
@@ -167,7 +182,7 @@ private extension HomeView {
         return section
     }
 
-    private func makeHeaderItemLayout() -> NSCollectionLayoutBoundarySupplementaryItem {
+    func makeHeaderItemLayout() -> NSCollectionLayoutBoundarySupplementaryItem {
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
             heightDimension: .absolute(48)
@@ -177,9 +192,57 @@ private extension HomeView {
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .top
         )
-        header.contentInsets = .init(top: 0, leading: 36, bottom: 0, trailing: 12)
+        header.contentInsets = .init(top: 0, leading: 12, bottom: 0, trailing: 0)
 
         return header
+    }
+}
+
+extension HomeView: UICollectionViewDelegate {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        contextMenuConfigurationForItemAt indexPath: IndexPath,
+        point: CGPoint
+    ) -> UIContextMenuConfiguration? {
+        guard let item = dataSource?.itemIdentifier(for: indexPath) else { return nil }
+
+        return UIContextMenuConfiguration(
+            identifier: indexPath as NSCopying,
+            previewProvider: nil
+        ) { _ in
+            var actions: [UIAction] = []
+
+            switch item {
+            case .clip:
+                let info = UIAction(
+                    title: "상세정보",
+                    image: UIImage(systemName: "magnifyingglass")
+                ) { [weak self] _ in
+                    self?.action.accept(.info(indexPath))
+                }
+                actions.append(info)
+                fallthrough
+            case .folder:
+                let edit = UIAction(
+                    title: "편집",
+                    image: UIImage(systemName: "pencil")
+                ) { [weak self] _ in
+                    self?.action.accept(.edit(indexPath))
+                }
+
+                let delete = UIAction(
+                    title: "삭제",
+                    image: UIImage(systemName: "trash"),
+                    attributes: .destructive
+                ) { [weak self] _ in
+                    self?.action.accept(.delete(indexPath))
+                }
+
+                actions.append(contentsOf: [edit, delete])
+            }
+
+            return UIMenu(title: "", children: actions)
+        }
     }
 }
 
@@ -188,6 +251,7 @@ private extension HomeView {
         setAttributes()
         setHierarchy()
         setConstraints()
+        setBindings()
     }
 
     func setAttributes() {
@@ -204,5 +268,12 @@ private extension HomeView {
             make.horizontalEdges.equalToSuperview()
             make.bottom.equalToSuperview()
         }
+    }
+
+    func setBindings() {
+        collectionView.rx.itemSelected
+            .map { Action.tap($0) }
+            .bind(to: action)
+            .disposed(by: disposeBag)
     }
 }
