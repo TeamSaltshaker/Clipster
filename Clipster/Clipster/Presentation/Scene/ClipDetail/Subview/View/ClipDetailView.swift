@@ -34,6 +34,8 @@ final class ClipDetailView: UIView {
 
     private let memoView = ClipDetailMemoView()
 
+    private let activityIndicator = UIActivityIndicatorView(style: .large)
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -50,6 +52,18 @@ final class ClipDetailView: UIView {
         folderRow.setDisplay(folderTitle)
         memoView.setDisplay(clipDisplay.memo)
     }
+
+    func setLoading(_ isLoading: Bool) {
+        if isLoading {
+            clipView.isHidden = true
+            memoView.isHidden = true
+            activityIndicator.startAnimating()
+        } else {
+            clipView.isHidden = false
+            memoView.isHidden = false
+            activityIndicator.stopAnimating()
+        }
+    }
 }
 
 private extension ClipDetailView {
@@ -64,7 +78,7 @@ private extension ClipDetailView {
     }
 
     func setHierarchy() {
-        [clipView, memoView]
+        [clipView, memoView, activityIndicator]
             .forEach { addSubview($0) }
 
         [urlMetadataStackView, separator, rowStackView]
@@ -83,6 +97,10 @@ private extension ClipDetailView {
         memoView.snp.makeConstraints { make in
             make.top.equalTo(clipView.snp.bottom).offset(16)
             make.horizontalEdges.equalToSuperview().inset(16)
+        }
+
+        activityIndicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
         }
 
         urlMetadataStackView.snp.makeConstraints { make in
