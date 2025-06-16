@@ -105,22 +105,6 @@ private extension EditClipViewController {
             }
             .disposed(by: disposeBag)
 
-        editClipView.urlInputTextField
-            .rx
-            .controlEvent(.editingDidBegin)
-            .subscribe { [weak self] _ in
-                self?.viewModel.action.accept(.editBeginURLTextField)
-            }
-            .disposed(by: disposeBag)
-
-        editClipView.urlInputTextField
-            .rx
-            .controlEvent(.editingDidEnd)
-            .subscribe { [weak self] _ in
-                self?.viewModel.action.accept(.editEndURLTextField)
-            }
-            .disposed(by: disposeBag)
-
         viewModel.state
             .map(\.urlTextFieldBorderColor)
             .map { UIColor(resource: $0).cgColor }
