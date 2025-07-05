@@ -14,6 +14,7 @@ final class CommonNavigationView: UIView {
         stackView.axis = .horizontal
         stackView.alignment = .center
         stackView.distribution = .equalSpacing
+        stackView.isHidden = true
         stackView.setContentCompressionResistancePriority(.required, for: .horizontal)
         return stackView
     }()
@@ -23,6 +24,7 @@ final class CommonNavigationView: UIView {
         stackView.axis = .horizontal
         stackView.alignment = .center
         stackView.distribution = .equalSpacing
+        stackView.isHidden = true
         stackView.setContentCompressionResistancePriority(.required, for: .horizontal)
         return stackView
     }()
@@ -47,6 +49,7 @@ final class CommonNavigationView: UIView {
     func setLeftItem(_ item: UIButton) {
         clearStackView(leftStackView)
         leftStackView.addArrangedSubview(item)
+        leftStackView.isHidden = false
     }
 
     func setLeftItems(_ items: [UIButton]) {
@@ -54,11 +57,13 @@ final class CommonNavigationView: UIView {
         items.forEach {
             leftStackView.addArrangedSubview($0)
         }
+        leftStackView.isHidden = false
     }
 
     func setRightItem(_ item: UIButton) {
         clearStackView(rightStackView)
         rightStackView.addArrangedSubview(item)
+        rightStackView.isHidden = false
     }
 
     func setRightItems(_ items: [UIButton]) {
@@ -66,6 +71,7 @@ final class CommonNavigationView: UIView {
         items.forEach {
             rightStackView.addArrangedSubview($0)
         }
+        rightStackView.isHidden = false
     }
 
     private func clearStackView(_ stackView: UIStackView) {
@@ -73,6 +79,7 @@ final class CommonNavigationView: UIView {
             stackView.removeArrangedSubview(view)
             view.removeFromSuperview()
         }
+        stackView.isHidden = true
     }
 }
 
@@ -99,12 +106,14 @@ private extension CommonNavigationView {
         leftStackView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(24)
             make.trailing.lessThanOrEqualTo(titleLabel.snp.leading).offset(-26)
+            make.height.equalTo(48)
             make.centerY.equalToSuperview()
         }
 
         rightStackView.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(24)
             make.leading.greaterThanOrEqualTo(titleLabel.snp.trailing).offset(26)
+            make.height.equalTo(48)
             make.centerY.equalToSuperview()
         }
     }
