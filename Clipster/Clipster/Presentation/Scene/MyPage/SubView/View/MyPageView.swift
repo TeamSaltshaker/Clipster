@@ -78,7 +78,7 @@ private extension MyPageView {
                   let items = dataSource?.snapshot().itemIdentifiers(inSection: sectionKind)
             else { return nil }
             switch sectionKind {
-            case .login:
+            case .login, .welcome:
                 return makeLoginSectionLayout(items: items)
             case .etc:
                 return makeAccountSectionLayout(items: items)
@@ -104,12 +104,14 @@ private extension MyPageView {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
         let totalSpacing = CGFloat(max(0, items.count - 1)) * itemSpacing
-        let totalHeight = CGFloat(items.count) * itemHeight + totalSpacing
+        let rawHeight = CGFloat(items.count) * itemHeight + totalSpacing
+        let groupHeight = max(1, rawHeight)
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(totalHeight)
+            heightDimension: .absolute(groupHeight)
         )
+
         let group = NSCollectionLayoutGroup.vertical(
             layoutSize: groupSize,
             subitems: [item]
@@ -142,7 +144,7 @@ private extension MyPageView {
             return NSCollectionLayoutItem(layoutSize: itemSize)
         }
 
-        let totalHeight: CGFloat = items.reduce(0) { result, item in
+        let rawHeight: CGFloat = items.reduce(0) { result, item in
             let height: CGFloat
             switch item {
             case .version:
@@ -152,10 +154,11 @@ private extension MyPageView {
             }
             return result + height
         }
+        let groupHeight = max(1, rawHeight)
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(totalHeight)
+            heightDimension: .absolute(groupHeight)
         )
 
         let group = NSCollectionLayoutGroup.vertical(
@@ -188,7 +191,7 @@ private extension MyPageView {
             return NSCollectionLayoutItem(layoutSize: itemSize)
         }
 
-        let totalHeight: CGFloat = items.reduce(0) { result, item in
+        let rawHeight: CGFloat = items.reduce(0) { result, item in
             let height: CGFloat = {
                 if case .sectionTitle = item {
                     return titleHeight
@@ -199,7 +202,7 @@ private extension MyPageView {
             return result + height
         }
 
-        let groupHeight = totalHeight + CGFloat(max(0, items.count - 1)) * spacing
+        let groupHeight = max(1, rawHeight + CGFloat(max(0, items.count - 1)) * spacing)
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
@@ -279,12 +282,12 @@ private extension MyPageView {
         ) { [weak self] header, _, indexPath in
             guard
                 let self,
-                let sectionIdentifier = dataSource?.sectionIdentifier(for: indexPath.section)
+                let sectionKind = dataSource?.sectionIdentifier(for: indexPath.section)
             else { return }
 
-            switch sectionIdentifier {
-            case .login(let title):
-                header.setTitle(title)
+            switch sectionKind {
+            case .login, .welcome:
+                header.setTitle(sectionKind.title)
                 header.setTitleFont(size: 28, weight: .extraBold)
             default:
                 break
