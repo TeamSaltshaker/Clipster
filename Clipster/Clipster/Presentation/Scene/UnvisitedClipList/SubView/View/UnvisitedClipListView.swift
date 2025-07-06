@@ -36,7 +36,7 @@ final class UnvisitedClipListView: UIView {
         )
         collectionView.delegate = self
         collectionView.contentInset.top = 24
-        collectionView.backgroundColor = .white800
+        collectionView.backgroundColor = .clear
         return collectionView
     }()
 
@@ -89,7 +89,7 @@ private extension UnvisitedClipListView {
         UICollectionViewCompositionalLayout { [weak self] _, env in
             var config = UICollectionLayoutListConfiguration(appearance: .plain)
             config.showsSeparators = false
-            config.backgroundColor = .white800
+            config.backgroundColor = .background
             config.trailingSwipeActionsConfigurationProvider = { [weak self] indexPath in
                 guard let item = self?.dataSource?.itemIdentifier(for: indexPath) else { return nil }
 
@@ -132,14 +132,14 @@ extension UnvisitedClipListView: UICollectionViewDelegate {
 
             let info = UIAction(
                 title: "상세정보",
-                image: .info
+                image: .info.withTintColor(.textPrimary)
             ) { [weak self] _ in
                 self?.action.accept(.detail(indexPath.item))
             }
 
             let edit = UIAction(
                 title: "편집",
-                image: .pen
+                image: .pen.withTintColor(.textPrimary)
             ) { [weak self] _ in
                 self?.action.accept(.edit(indexPath.item))
             }
@@ -166,7 +166,7 @@ private extension UnvisitedClipListView {
     }
 
     func setAttributes() {
-        backgroundColor = .white800
+        backgroundColor = .background
     }
 
     func setHierarchy() {

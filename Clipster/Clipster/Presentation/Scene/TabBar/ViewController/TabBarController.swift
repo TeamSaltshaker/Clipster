@@ -61,7 +61,7 @@ private extension TabBarViewController {
     }
 
     func setHierarchy() {
-        view.backgroundColor = .white800
+        view.backgroundColor = .background
         view.addSubview(tabBarView)
     }
 

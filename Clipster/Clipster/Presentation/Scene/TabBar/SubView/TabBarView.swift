@@ -13,6 +13,14 @@ final class TabBarView: UIView {
     private let disposeBag = DisposeBag()
     let action = PublishRelay<Action>()
 
+    private let baseBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .cell
+        view.layer.cornerRadius = 32
+        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        return view
+    }()
+
     private let stackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
@@ -28,10 +36,10 @@ final class TabBarView: UIView {
         let button = UIButton()
         let normalImage = UIImage.home
             .withRenderingMode(.alwaysOriginal)
-            .withTintColor(.black100)
+            .withTintColor(.textPrimary)
         let selectedImage = UIImage.home
             .withRenderingMode(.alwaysOriginal)
-            .withTintColor(.blue600)
+            .withTintColor(.appPrimary)
         button.setImage(normalImage, for: .normal)
         button.setImage(selectedImage, for: .selected)
         return button
@@ -41,10 +49,10 @@ final class TabBarView: UIView {
         let button = UIButton()
         let normalImage = UIImage.search
             .withRenderingMode(.alwaysOriginal)
-            .withTintColor(.black100)
+            .withTintColor(.textPrimary)
         let selectedImage = UIImage.search
             .withRenderingMode(.alwaysOriginal)
-            .withTintColor(.blue600)
+            .withTintColor(.appPrimary)
         button.setImage(normalImage, for: .normal)
         button.setImage(selectedImage, for: .selected)
         return button
@@ -54,10 +62,10 @@ final class TabBarView: UIView {
         let button = UIButton()
         let normalImage = UIImage.user
             .withRenderingMode(.alwaysOriginal)
-            .withTintColor(.black100)
+            .withTintColor(.textPrimary)
         let selectedImage = UIImage.user
             .withRenderingMode(.alwaysOriginal)
-            .withTintColor(.blue600)
+            .withTintColor(.appPrimary)
         button.setImage(normalImage, for: .normal)
         button.setImage(selectedImage, for: .selected)
         return button
@@ -101,7 +109,7 @@ private extension TabBarView {
     }
 
     func setAttributes() {
-        backgroundColor = .white900
+        backgroundColor = .background
         layer.cornerRadius = 32
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         layer.shadowColor = UIColor.black.cgColor
@@ -112,7 +120,10 @@ private extension TabBarView {
     }
 
     func setHierarchy() {
-        addSubview(stackView)
+        [
+            baseBackgroundView,
+            stackView
+        ].forEach { addSubview($0) }
 
         [
             homeContainer,
@@ -126,6 +137,10 @@ private extension TabBarView {
     }
 
     func setConstraints() {
+        baseBackgroundView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
         stackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
