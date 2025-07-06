@@ -10,6 +10,7 @@ final class DefaultSaveThemeOptionUseCase: SaveThemeOptionUseCase {
 
     func execute(_ option: ThemeOption) async -> Result<Void, Error> {
         userDefaults.set(option.rawValue, forKey: key)
+        await AppThemeManager.shared.apply(theme: option)
         return .success(())
     }
 }
