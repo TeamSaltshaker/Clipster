@@ -20,7 +20,7 @@ final class ClipDetailView: UIView {
 
     private let memoView: MemoView = {
         let view = MemoView()
-        view.memoTextView.textColor = .black500
+        view.memoTextView.textColor = .textSecondary
         view.memoTextView.isEditable = false
         return view
     }()
@@ -29,21 +29,21 @@ final class ClipDetailView: UIView {
 
     private let recentVisitedDateLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black500
+        label.textColor = .textSecondary
         label.font = .pretendard(size: 12, weight: .regular)
         return label
     }()
 
     private let recentEditedDateLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black500
+        label.textColor = .textSecondary
         label.font = .pretendard(size: 12, weight: .regular)
         return label
     }()
 
     private let createdDateLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black500
+        label.textColor = .textSecondary
         label.font = .pretendard(size: 12, weight: .regular)
         return label
     }()
@@ -89,7 +89,7 @@ private extension ClipDetailView {
     }
 
     func setAttributes() {
-        backgroundColor = .white800
+        backgroundColor = .background
 
         commonNavigationView.setTitle("상세정보")
         commonNavigationView.setLeftItem(backButton)
