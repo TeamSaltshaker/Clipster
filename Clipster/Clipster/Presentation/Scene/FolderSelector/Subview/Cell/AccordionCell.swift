@@ -27,7 +27,7 @@ final class AccordionCell: UITableViewCell {
 
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black100
+        label.textColor = .textPrimary
         label.numberOfLines = 1
         label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         return label
@@ -36,7 +36,7 @@ final class AccordionCell: UITableViewCell {
     private let countLabel: UILabel = {
         let label = UILabel()
         label.font = .pretendard(size: 18, weight: .semiBold)
-        label.textColor = .black500
+        label.textColor = .textSecondary
         label.numberOfLines = 1
         label.setContentCompressionResistancePriority(.required, for: .horizontal)
         return label
@@ -60,13 +60,13 @@ final class AccordionCell: UITableViewCell {
 
     private let fullWidthSeparatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = .black800
+        view.backgroundColor = .textTertiary
         return view
     }()
 
     private let insetSeparatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = .black800
+        view.backgroundColor = .textTertiary
         return view
     }()
 
@@ -113,10 +113,10 @@ final class AccordionCell: UITableViewCell {
 
         if folder.isHighlighted {
             titleLabel.font = .pretendard(size: 18, weight: .semiBold)
-            titleLabel.textColor = .blue600
+            titleLabel.textColor = .appPrimary
         } else {
             titleLabel.font = .pretendard(size: 18, weight: .regular)
-            titleLabel.textColor = .black100
+            titleLabel.textColor = .textPrimary
         }
 
         updateCellLeadingConstraint(depth: folder.depth)
@@ -155,7 +155,8 @@ private extension AccordionCell {
     }
 
     func setAttributes() {
-        contentView.backgroundColor = .white900
+        backgroundColor = .background
+        contentView.backgroundColor = .cell
     }
 
     func setHierarchy() {
