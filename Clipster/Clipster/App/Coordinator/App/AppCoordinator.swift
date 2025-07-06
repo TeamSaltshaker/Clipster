@@ -17,11 +17,23 @@ final class AppCoordinator: Coordinator {
     }
 
     func start() {
+        applySavedTheme()
+
         let hasSeen = UserDefaults.standard.bool(forKey: "hasSeenOnboarding")
         if hasSeen {
             showTab()
         } else {
             showOnboarding()
+        }
+    }
+}
+
+private extension AppCoordinator {
+    func applySavedTheme() {
+        let fetchThemeUseCase = diContainer.makeFetchThemeUseCase()
+        Task {
+            let theme = try? await fetchThemeUseCase.execute().get()
+            await AppThemeManager.shared.apply(theme: theme ?? .system)
         }
     }
 }

@@ -26,7 +26,7 @@ final class URLMetadataStackView: UIStackView {
         let label = UILabel()
         label.font = .pretendard(size: 16, weight: .semiBold)
         label.numberOfLines = 2
-        label.textColor = .black100
+        label.textColor = .textPrimary
         label.text = " "
         return label
     }()
@@ -34,7 +34,7 @@ final class URLMetadataStackView: UIStackView {
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = .pretendard(size: 14, weight: .medium)
-        label.textColor = .secondaryLabel
+        label.textColor = .textSecondary
         label.numberOfLines = 2
         label.text = " "
         return label
@@ -47,6 +47,14 @@ final class URLMetadataStackView: UIStackView {
 
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            layer.applyDynamicBorderColor(color: .dialogueStroke, for: traitCollection)
+        }
     }
 
     func setDisplay(display: URLMetadataDisplay) {
@@ -76,11 +84,11 @@ private extension URLMetadataStackView {
         spacing = 12
         distribution = .fillProportionally
         alignment = .top
-        backgroundColor = .white900
+        backgroundColor = .cell
         layer.cornerRadius = 12
         clipsToBounds = true
         layer.borderWidth = 1
-        layer.borderColor = UIColor.black900.cgColor
+        layer.borderColor = UIColor.dialogueStroke.cgColor
         layer.shadowPath = UIBezierPath(
             roundedRect: bounds,
             cornerRadius: layer.cornerRadius

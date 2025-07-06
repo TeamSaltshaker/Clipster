@@ -218,8 +218,12 @@ extension EditClipViewController: View {
 
         reactor.state
             .map(\.urlTextFieldBorderColor)
-            .map { UIColor(resource: $0).cgColor }
             .asDriver(onErrorDriveWith: .empty())
+            .map { [weak self] in
+                UIColor(resource: $0)
+                    .resolvedColor(with: self?.traitCollection ?? .current)
+                    .cgColor
+            }
             .drive(editClipView.urlView.urlTextField.layer.rx.borderColor)
             .disposed(by: disposeBag)
 

@@ -6,7 +6,7 @@ final class FolderSelectorCell: UITableViewCell {
 
     private let chevronImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = .chevronRight
+        imageView.image = .chevronRight.withTintColor(.textPrimary)
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -33,6 +33,8 @@ private extension FolderSelectorCell {
     }
 
     func setAttributes() {
+        backgroundColor = .background
+        contentView.backgroundColor = .cell
     }
 
     func setHierarchy() {

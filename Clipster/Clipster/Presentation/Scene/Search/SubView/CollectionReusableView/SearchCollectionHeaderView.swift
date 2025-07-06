@@ -9,14 +9,14 @@ final class SearchCollectionHeaderView: UICollectionReusableView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .pretendard(size: 18, weight: .semiBold)
-        label.textColor = .black100
+        label.textColor = .textPrimary
         return label
     }()
 
     let deleteAllButton: UIButton = {
         let button = UIButton()
         button.setTitle("전체 삭제", for: .normal)
-        button.setTitleColor(.black500, for: .normal)
+        button.setTitleColor(.textSecondary, for: .normal)
         button.titleLabel?.font = .pretendard(size: 14, weight: .medium)
         button.titleLabel?.textAlignment = .center
         button.isHidden = true
@@ -26,7 +26,7 @@ final class SearchCollectionHeaderView: UICollectionReusableView {
     let countLabel: UILabel = {
         let label = UILabel()
         label.font = .pretendard(size: 14, weight: .medium)
-        label.textColor = .black500
+        label.textColor = .textSecondary
         return label
     }()
 

@@ -6,7 +6,7 @@ final class URLView: UIView {
         let label = UILabel()
         label.text = "URL"
         label.font = .pretendard(size: 16, weight: .medium)
-        label.textColor = .black100
+        label.textColor = .textPrimary
         return label
     }()
 

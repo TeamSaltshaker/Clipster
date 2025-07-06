@@ -43,7 +43,7 @@ final class EmptyView: UIView {
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = .pretendard(size: 16, weight: .medium)
-        label.textColor = .black400
+        label.textColor = .textSecondary
         label.numberOfLines = 2
         label.textAlignment = .center
         return label
@@ -68,7 +68,7 @@ private extension EmptyView {
     }
 
     func setAttributes() {
-        backgroundColor = .white800
+        backgroundColor = .background
 
         descriptionLabel.text = emptyViewType.description
     }

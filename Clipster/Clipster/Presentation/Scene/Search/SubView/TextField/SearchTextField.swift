@@ -7,7 +7,7 @@ final class SearchTextField: UITextField {
     let clearButton: UIButton = {
         let button = UIButton()
         var config = UIButton.Configuration.plain()
-        config.image = .xGray
+        config.image = .xGray.withTintColor(.textSecondary)
         config.contentInsets = NSDirectionalEdgeInsets(top: 14, leading: 14, bottom: 14, trailing: 14)
         button.configuration = config
         return button
@@ -43,13 +43,13 @@ private extension SearchTextField {
     func setAttributes() {
         let placeholderText = "검색"
         let commontFont = UIFont.pretendard(size: 16, weight: .medium)
-        let placeholderColor = UIColor.black800
+        let placeholderColor = UIColor.textTertiary
 
         let spacerAttachment = NSTextAttachment()
         spacerAttachment.bounds = CGRect(x: 0, y: 0, width: 12, height: 0)
 
         let imageAttachment = NSTextAttachment()
-        imageAttachment.image = .searchGray
+        imageAttachment.image = .searchGray.withTintColor(.textPrimary)
         let imageSize: CGFloat = 24
         let imageOffsetY = (commontFont.capHeight - imageSize) / 2
         imageAttachment.bounds = CGRect(x: 0, y: imageOffsetY, width: imageSize, height: imageSize)
@@ -62,7 +62,7 @@ private extension SearchTextField {
             .font: commontFont
         ]))
 
-        textColor = .black100
+        textColor = .textPrimary
         attributedPlaceholder = fullString
         rightView = clearButton
         rightViewMode = .whileEditing
@@ -72,7 +72,7 @@ private extension SearchTextField {
         smartDashesType = .no
         smartInsertDeleteType = .no
         layer.cornerRadius = 12
-        backgroundColor = .white900
+        backgroundColor = .cell
         font = commontFont
     }
 }

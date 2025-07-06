@@ -34,10 +34,10 @@ extension MyPageItem {
 
     var titleColor: UIColor {
         switch self {
-        case .sectionTitle: .blue600
+        case .sectionTitle: .appPrimary
         case .account(let item): item.titleColor
-        case .version: .black500
-        default: .black100
+        case .version: .textSecondary
+        default: .textPrimary
         }
     }
 
@@ -58,14 +58,14 @@ extension MyPageItem {
 
     var valueColor: UIColor {
         switch self {
-        default: .black500
+        default: .textSecondary
         }
     }
 
     var rightIcon: UIImage? {
         switch self {
-        case .dropdown(let item): item.image
-        case .chevron: .chevronRight.withTintColor(.black100)
+        case .dropdown(let item): item.image.withTintColor(.textSecondary)
+        case .chevron: .chevronRight.withTintColor(.textPrimary)
         default: nil
         }
     }

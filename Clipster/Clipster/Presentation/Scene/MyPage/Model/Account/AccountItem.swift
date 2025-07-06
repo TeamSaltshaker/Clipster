@@ -15,7 +15,7 @@ extension AccountItem {
 
     var titleColor: UIColor {
         switch self {
-        case .logout: .black100
+        case .logout: .textPrimary
         case .withdraw: .red600
         }
     }

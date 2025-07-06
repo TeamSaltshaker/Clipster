@@ -3,7 +3,7 @@ import UIKit
 final class AddFAButton: UIButton {
     private let innerButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .blue600
+        button.backgroundColor = .appPrimary
         button.setImage(.plus.withTintColor(.white900), for: .normal)
         button.layer.cornerRadius = 28
         button.layer.shadowColor = UIColor.black.cgColor

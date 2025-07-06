@@ -17,7 +17,7 @@ private extension EditButton {
     }
 
     func setAttributes() {
-        setImage(.pen, for: .normal)
+        setImage(.pen.withTintColor(.textPrimary), for: .normal)
         contentHorizontalAlignment = .trailing
     }
 }

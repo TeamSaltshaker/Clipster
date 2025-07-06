@@ -64,7 +64,7 @@ final class FolderView: UIView {
         )
         collectionView.delegate = self
         collectionView.contentInset.top = 24
-        collectionView.backgroundColor = .white800
+        collectionView.backgroundColor = .background
         return collectionView
     }()
 
@@ -132,7 +132,7 @@ private extension FolderView {
         let layout = UICollectionViewCompositionalLayout { index, env in
             var config = UICollectionLayoutListConfiguration(appearance: .plain)
             config.showsSeparators = false
-            config.backgroundColor = .white800
+            config.backgroundColor = .background
             config.headerMode = .supplementary
             config.headerTopPadding = 0
             config.trailingSwipeActionsConfigurationProvider = { [weak self] indexPath in
@@ -218,14 +218,14 @@ private extension FolderView {
     func makeAddButtonMenu() -> UIMenu {
         let addFolderAction = UIAction(
             title: "폴더 추가",
-            image: .folderPlus
+            image: .folderPlus.withTintColor(.textPrimary)
         ) { [weak self] _ in
             self?.action.accept(.didTapAddFolderButton)
         }
 
         let addClipAction = UIAction(
             title: "클립 추가",
-            image: .clip
+            image: .clip.withTintColor(.textPrimary)
         ) { [weak self] _ in
             self?.action.accept(.didTapAddClipButton)
         }
@@ -236,7 +236,7 @@ private extension FolderView {
     func makeDetailAction(for indexPath: IndexPath) -> UIAction {
         .init(
             title: "상세정보",
-            image: .info
+            image: .info.withTintColor(.textPrimary)
         ) { [weak self] _ in
             self?.performAction(for: indexPath) { .didTapDetailButton($0) }
         }
@@ -245,7 +245,7 @@ private extension FolderView {
     func makeEditAction(for indexPath: IndexPath) -> UIAction {
         .init(
             title: "편집",
-            image: .pen
+            image: .pen.withTintColor(.textPrimary)
         ) { [weak self] _ in
             self?.performAction(for: indexPath) { .didTapEditButton($0) }
         }
@@ -305,7 +305,7 @@ private extension FolderView {
         addButton.menu = makeAddButtonMenu()
         addButton.showsMenuAsPrimaryAction = true
 
-        backgroundColor = .white800
+        backgroundColor = .background
     }
 
     func setHierarchy() {

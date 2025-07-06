@@ -22,11 +22,11 @@ private extension SaveButton {
 
         let normalAttributes: [NSAttributedString.Key: Any] = [
             .font: normalFont,
-            .foregroundColor: UIColor.blue600
+            .foregroundColor: UIColor.appPrimary
         ]
         let disabledAttributes: [NSAttributedString.Key: Any] = [
             .font: disabledFont,
-            .foregroundColor: UIColor.black800
+            .foregroundColor: UIColor.textTertiary
         ]
 
         setAttributedTitle(NSAttributedString(string: "저장", attributes: normalAttributes), for: .normal)

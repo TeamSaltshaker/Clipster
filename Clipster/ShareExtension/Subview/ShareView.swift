@@ -2,6 +2,12 @@ import SnapKit
 import UIKit
 
 final class ShareView: UIView {
+    private let baseBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .cell
+        return view
+    }()
+
     let commonNavigationView: CommonNavigationView = {
         let commonNavigationView = CommonNavigationView()
         commonNavigationView.setTitle("클립 추가")
@@ -15,7 +21,7 @@ final class ShareView: UIView {
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsHorizontalScrollIndicator = false
-        scrollView.backgroundColor = .white900
+        scrollView.backgroundColor = .clear
         return scrollView
     }()
 
@@ -49,7 +55,6 @@ final class ShareView: UIView {
 
     let selectedFolderView: SelectedFolderView = {
         let view = SelectedFolderView(type: .clip, mode: .edit)
-        view.folderView.backgroundColor = .blue900
         view.addButton.isHidden = true
         return view
     }()
@@ -72,7 +77,7 @@ private extension ShareView {
     }
 
     func setAttributes() {
-        backgroundColor = .white900
+        backgroundColor = .background
 
         layer.masksToBounds = false
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -84,6 +89,7 @@ private extension ShareView {
 
     func setHierarchy() {
         [
+            baseBackgroundView,
             commonNavigationView,
             scrollView
         ].forEach {
@@ -114,6 +120,10 @@ private extension ShareView {
     }
 
     func setConstraints() {
+        baseBackgroundView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
         commonNavigationView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.directionalHorizontalEdges.equalToSuperview()

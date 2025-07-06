@@ -43,7 +43,7 @@ final class EditClipReactor: Reactor {
         var urlValidationImageResource: ImageResource?
         var urlValidationLabelText: String = ""
         var urlMetadataDisplay: URLMetadataDisplay?
-        var urlTextFieldBorderColor: ColorResource = .black900
+        var urlTextFieldBorderColor: ColorResource = .dialogueStroke
         var isLoading = false
         var isHiddenURLMetadataStackView = true
         var isHiddenURLValidationStackView = true
@@ -238,7 +238,7 @@ final class EditClipReactor: Reactor {
                 newState.urlValidationImageResource = .checkBlue
                 newState.urlValidationLabelText = "올바른 URL 입니다."
                 if !currentState.urlString.isEmpty {
-                    newState.urlTextFieldBorderColor = .blue600
+                    newState.urlTextFieldBorderColor = .appPrimary
                 }
             case .validWithWarning:
                 newState.isURLValid = true
@@ -259,7 +259,7 @@ final class EditClipReactor: Reactor {
 
             if currentState.urlString.isEmpty {
                 newState.urlValidationImageResource = .none
-                newState.urlTextFieldBorderColor = .black900
+                newState.urlTextFieldBorderColor = .dialogueStroke
                 newState.isHiddenURLValidationStackView = true
             }
         case .updateURLMetadata(let urlMetaDisplay):

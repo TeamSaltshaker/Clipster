@@ -27,7 +27,7 @@ private extension SearchClipCell {
 
     func setAttributes() {
         var background = UIBackgroundConfiguration.clear()
-        background.backgroundColor = .white900
+        background.backgroundColor = .cell
         background.cornerRadius = 12
         background.backgroundInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
         self.backgroundConfiguration = background

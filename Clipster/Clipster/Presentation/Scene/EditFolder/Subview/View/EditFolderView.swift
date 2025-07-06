@@ -10,7 +10,7 @@ final class EditFolderView: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "제목"
-        label.textColor = .black100
+        label.textColor = .textPrimary
         label.font = .pretendard(size: 16, weight: .medium)
         return label
     }()
@@ -40,7 +40,7 @@ private extension EditFolderView {
     }
 
     func setAttributes() {
-        backgroundColor = .white800
+        backgroundColor = .background
 
         commonNavigationView.setLeftItem(backButton)
         commonNavigationView.setRightItem(saveButton)

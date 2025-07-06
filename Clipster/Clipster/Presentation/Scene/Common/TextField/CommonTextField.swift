@@ -50,12 +50,20 @@ final class CommonTextField: UITextField {
         bounds.inset(by: textPadding)
     }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            layer.applyDynamicBorderColor(color: .dialogueStroke, for: traitCollection)
+        }
+    }
+
     private func setMode() {
         switch mode {
         case .edit:
-            textColor = .black100
+            textColor = .textPrimary
         case .detail:
-            textColor = .black500
+            textColor = .textSecondary
             isUserInteractionEnabled = false
         }
     }
@@ -87,13 +95,13 @@ private extension CommonTextField {
         smartInsertDeleteType = .no
         layer.borderWidth = 1
         layer.cornerRadius = 12
-        layer.borderColor = UIColor.black900.cgColor
-        backgroundColor = .white900
+        layer.borderColor = UIColor.dialogueStroke.cgColor
+        backgroundColor = .cell
         font = commontFont
         attributedPlaceholder = NSAttributedString(
             string: placeholder,
             attributes: [
-                .foregroundColor: UIColor.black800,
+                .foregroundColor: UIColor.textTertiary,
                 .font: commontFont
             ]
         )

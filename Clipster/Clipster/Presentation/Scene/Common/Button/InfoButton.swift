@@ -17,7 +17,7 @@ private extension InfoButton {
     }
 
     func setAttributes() {
-        setImage(.info, for: .normal)
+        setImage(.info.withTintColor(.textPrimary), for: .normal)
         contentHorizontalAlignment = .trailing
     }
 }

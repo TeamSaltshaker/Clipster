@@ -9,7 +9,7 @@ final class RecentVisitedClipCell: UICollectionViewCell {
 
     let deleteButton: UIButton = {
         let button = UIButton()
-        button.setImage(.xGray, for: .normal)
+        button.setImage(.xGray.withTintColor(.textSecondary), for: .normal)
         button.contentHorizontalAlignment = .center
         return button
     }()
@@ -41,7 +41,8 @@ private extension RecentVisitedClipCell {
     }
 
     func setAttributes() {
-        contentView.backgroundColor = .white900
+        backgroundColor = .background
+        contentView.backgroundColor = .cell
         contentView.layer.cornerRadius = 12
     }
 

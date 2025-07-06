@@ -4,10 +4,10 @@ import UIKit
 final class FolderListCell: UICollectionViewListCell {
     private let folderImageContainerView: UIView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .clear
+        imageView.backgroundColor = .iconBG
         imageView.layer.cornerRadius = 8
         imageView.layer.borderWidth = 1
-        imageView.layer.borderColor = UIColor.blue900.cgColor
+        imageView.layer.borderColor = UIColor.iconStroke.cgColor
         return imageView
     }()
 
@@ -21,7 +21,7 @@ final class FolderListCell: UICollectionViewListCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .pretendard(size: 16, weight: .semiBold)
-        label.textColor = .black100
+        label.textColor = .textPrimary
         label.numberOfLines = 1
         return label
     }()
@@ -29,7 +29,7 @@ final class FolderListCell: UICollectionViewListCell {
     private let itemCountLabel: UILabel = {
         let label = UILabel()
         label.font = .pretendard(size: 12, weight: .regular)
-        label.textColor = .black500
+        label.textColor = .textSecondary
         label.numberOfLines = 1
         return label
     }()
@@ -44,7 +44,7 @@ final class FolderListCell: UICollectionViewListCell {
 
     private let chevronImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = .chevronRight
+        imageView.image = .chevronRight.withTintColor(.textPrimary)
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -56,6 +56,14 @@ final class FolderListCell: UICollectionViewListCell {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            folderImageContainerView.layer.applyDynamicBorderColor(color: .dialogueStroke, for: traitCollection)
+        }
     }
 
     func setDisplay(_ display: FolderDisplay) {
@@ -73,7 +81,7 @@ private extension FolderListCell {
 
     func setAttributes() {
         var background = UIBackgroundConfiguration.clear()
-        background.backgroundColor = .white900
+        background.backgroundColor = .cell
         background.cornerRadius = 12
         background.backgroundInsets = .init(top: 0, leading: 24, bottom: 0, trailing: 0)
         self.backgroundConfiguration = background

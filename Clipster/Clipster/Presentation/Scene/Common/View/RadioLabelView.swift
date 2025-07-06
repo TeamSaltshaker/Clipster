@@ -11,7 +11,7 @@ final class RadioLabelView: UIView {
 
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black100
+        label.textColor = .textPrimary
         label.font = .pretendard(size: 16, weight: .regular)
         return label
     }()

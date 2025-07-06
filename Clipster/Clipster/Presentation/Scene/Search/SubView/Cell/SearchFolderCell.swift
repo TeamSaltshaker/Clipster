@@ -4,7 +4,6 @@ import UIKit
 final class SearchFolderCell: UICollectionViewListCell {
     private let folderView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white900
         view.layer.cornerRadius = 12
         return view
     }()
@@ -34,7 +33,7 @@ private extension SearchFolderCell {
 
     func setAttributes() {
         var background = UIBackgroundConfiguration.clear()
-        background.backgroundColor = .white900
+        background.backgroundColor = .cell
         background.cornerRadius = 12
         background.backgroundInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
         self.backgroundConfiguration = background

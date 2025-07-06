@@ -11,7 +11,7 @@ final class SettingSectionBackgroundView: UICollectionReusableView {
 
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         super.apply(layoutAttributes)
-        backgroundColor = .white900
+        backgroundColor = .cell
         layer.cornerRadius = 12
     }
 }

@@ -18,7 +18,7 @@ final class SelectedFolderView: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "저장폴더"
-        label.textColor = .black100
+        label.textColor = .textPrimary
         label.font = .pretendard(size: 16, weight: .medium)
         return label
     }()
@@ -27,7 +27,7 @@ final class SelectedFolderView: UIView {
 
     let folderView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white900
+        view.backgroundColor = .cell
         view.layer.cornerRadius = 12
         return view
     }()
@@ -36,7 +36,7 @@ final class SelectedFolderView: UIView {
 
     private let chevronImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = .chevronRight
+        imageView.image = .chevronRight.withTintColor(.textPrimary)
         imageView.contentMode = .right
         return imageView
     }()

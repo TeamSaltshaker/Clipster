@@ -4,8 +4,8 @@ import UIKit
 final class FolderRowView: UIView {
     private let folderImageBackgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white900
-        view.layer.borderColor = UIColor.blue900.cgColor
+        view.backgroundColor = .iconBG
+        view.layer.borderColor = UIColor.iconStroke.cgColor
         view.layer.borderWidth = 1
         view.layer.cornerRadius = 8
         return view
@@ -26,14 +26,14 @@ final class FolderRowView: UIView {
 
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black100
+        label.textColor = .textPrimary
         label.font = .pretendard(size: 16, weight: .semiBold)
         return label
     }()
 
     private let countLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black500
+        label.textColor = .textSecondary
         label.font = .pretendard(size: 12, weight: .regular)
         return label
     }()
@@ -47,10 +47,18 @@ final class FolderRowView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            folderImageBackgroundView.layer.applyDynamicBorderColor(color: .dialogueStroke, for: traitCollection)
+        }
+    }
+
     func setDisplay(_ folder: FolderDisplay?, query: String = "") {
         let title = folder?.title ?? "홈"
         if !query.isEmpty {
-            titleLabel.attributedText = title.highlight(query: query, foregroundColor: .black100, font: .pretendard(size: 16, weight: .semiBold))
+            titleLabel.attributedText = title.highlight(query: query, foregroundColor: .textPrimary, font: .pretendard(size: 16, weight: .semiBold))
         } else {
             titleLabel.text = title
         }

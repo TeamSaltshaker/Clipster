@@ -13,7 +13,7 @@ final class ClipGridCell: UICollectionViewCell {
 
     private let visitIndicatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = .blue600
+        view.backgroundColor = .appPrimary
         view.layer.cornerRadius = 6
         view.layer.borderWidth = 1.5
         view.layer.borderColor = UIColor.white900.cgColor
@@ -24,7 +24,7 @@ final class ClipGridCell: UICollectionViewCell {
     private let titleTextView: UITextView = {
         let textView = UITextView()
         textView.font = .init(name: "Pretendard-Medium", size: 14)
-        textView.textColor = .black100
+        textView.textColor = .textPrimary
         textView.isEditable = false
         textView.isScrollEnabled = false
         textView.isSelectable = false
@@ -38,7 +38,7 @@ final class ClipGridCell: UICollectionViewCell {
     private let memoLabel: UILabel = {
         let label = UILabel()
         label.font = .init(name: "Pretendard-Regular", size: 12)
-        label.textColor = .black300
+        label.textColor = .textSecondary
         return label
     }()
 
@@ -66,7 +66,7 @@ final class ClipGridCell: UICollectionViewCell {
             thumbnailImageView.image = .none
         }
         titleTextView.text = display.urlMetadata.title
-        memoLabel.text = display.memo
+        memoLabel.text = display.isShowSubTitle ? display.subTitle : display.memo
         visitIndicatorView.isHidden = display.isVisited
     }
 }
@@ -79,7 +79,8 @@ private extension ClipGridCell {
     }
 
     func setAttributes() {
-        contentView.backgroundColor = .white900
+        backgroundColor = .background
+        contentView.backgroundColor = .cell
         layer.cornerRadius = 12
         clipsToBounds = true
     }
