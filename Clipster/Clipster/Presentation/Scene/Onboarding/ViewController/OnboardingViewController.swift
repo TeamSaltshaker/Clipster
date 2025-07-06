@@ -139,7 +139,7 @@ private extension OnboardingViewController {
     }
 
     func setAttributes() {
-        view.backgroundColor = .white900
+        view.backgroundColor = .background
     }
 
     func setHierarchy() {

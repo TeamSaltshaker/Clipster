@@ -19,7 +19,7 @@ final class OnboardingCell: UICollectionViewCell {
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = .pretendard(size: 18, weight: .regular)
-        label.textColor = .black50
+        label.textColor = .textPrimary
         label.textAlignment = .center
         label.numberOfLines = 0
         return label
