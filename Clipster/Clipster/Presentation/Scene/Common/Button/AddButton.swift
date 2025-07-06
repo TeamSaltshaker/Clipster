@@ -17,7 +17,7 @@ private extension AddButton {
     }
 
     func setAttributes() {
-        setImage(.plus, for: .normal)
+        setImage(.plus.withTintColor(.textPrimary), for: .normal)
         contentHorizontalAlignment = .trailing
     }
 }

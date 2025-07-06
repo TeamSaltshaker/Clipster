@@ -21,7 +21,7 @@ private extension CancelButton {
 
         let normalAttributes: [NSAttributedString.Key: Any] = [
             .font: normalFont,
-            .foregroundColor: UIColor.black100
+            .foregroundColor: UIColor.textPrimary
         ]
 
         setAttributedTitle(NSAttributedString(string: "취소", attributes: normalAttributes), for: .normal)

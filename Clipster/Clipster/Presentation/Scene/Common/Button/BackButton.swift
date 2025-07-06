@@ -31,7 +31,7 @@ private extension BackButton {
         let symbolConfig = UIImage.SymbolConfiguration(pointSize: pointSize, weight: .medium)
         let image = UIImage.chevronLeft
             .withConfiguration(symbolConfig)
-            .withTintColor(.black100, renderingMode: .alwaysOriginal)
+            .withTintColor(.textPrimary, renderingMode: .alwaysOriginal)
 
         var config = UIButton.Configuration.plain()
         config.image = image
@@ -41,8 +41,8 @@ private extension BackButton {
         configuration = config
 
         titleLabel?.font = .pretendard(size: 14, weight: .medium)
-        setTitleColor(.black100, for: .normal)
-        setTitleColor(.black100, for: .highlighted)
+        setTitleColor(.textPrimary, for: .normal)
+        setTitleColor(.textPrimary, for: .highlighted)
 
         contentHorizontalAlignment = .leading
     }

@@ -22,11 +22,11 @@ private extension ConfirmButton {
 
         let normalAttributes: [NSAttributedString.Key: Any] = [
             .font: normalFont,
-            .foregroundColor: UIColor.blue600
+            .foregroundColor: UIColor.appPrimary
         ]
         let disabledAttributes: [NSAttributedString.Key: Any] = [
             .font: disabledFont,
-            .foregroundColor: UIColor.black800
+            .foregroundColor: UIColor.appPrimary
         ]
 
         setAttributedTitle(NSAttributedString(string: "확인", attributes: normalAttributes), for: .normal)
