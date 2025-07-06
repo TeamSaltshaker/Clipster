@@ -6,7 +6,7 @@ final class MemoView: UIView {
         let label = UILabel()
         label.text = "메모"
         label.font = .pretendard(size: 16, weight: .medium)
-        label.textColor = .black100
+        label.textColor = .textPrimary
         return label
     }()
 
@@ -14,8 +14,8 @@ final class MemoView: UIView {
         let view = UIView()
         view.layer.cornerRadius = 12
         view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.black900.cgColor
-        view.backgroundColor = .white900
+        view.layer.borderColor = UIColor.dialogueStroke.cgColor
+        view.backgroundColor = .cell
         return view
     }()
 
@@ -23,12 +23,13 @@ final class MemoView: UIView {
         let textView = UITextView()
         textView.font = .pretendard(size: 14, weight: .regular)
         textView.isScrollEnabled = true
+        textView.backgroundColor = .clear
         return textView
     }()
 
     let memoLimitLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black500
+        label.textColor = .secondaryLabel
         label.font = .pretendard(size: 12, weight: .regular)
         label.textAlignment = .right
         return label
@@ -41,6 +42,14 @@ final class MemoView: UIView {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            memoContainerView.layer.applyDynamicBorderColor(color: .dialogueStroke, for: traitCollection)
+        }
     }
 }
 

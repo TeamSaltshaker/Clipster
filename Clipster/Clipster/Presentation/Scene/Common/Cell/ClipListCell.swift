@@ -15,14 +15,14 @@ final class ClipListCell: UICollectionViewListCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .pretendard(size: 16, weight: .semiBold)
-        label.textColor = .black100
+        label.textColor = .textPrimary
         return label
     }()
 
     private let memoLabel: UILabel = {
         let label = UILabel()
         label.font = .pretendard(size: 12, weight: .regular)
-        label.textColor = .black500
+        label.textColor = .textSecondary
         return label
     }()
 
@@ -83,7 +83,7 @@ private extension ClipListCell {
 
     func setAttributes() {
         var background = UIBackgroundConfiguration.clear()
-        background.backgroundColor = .white900
+        background.backgroundColor = .cell
         background.cornerRadius = 12
         background.backgroundInsets = .init(top: 0, leading: 24, bottom: 0, trailing: 0)
         self.backgroundConfiguration = background

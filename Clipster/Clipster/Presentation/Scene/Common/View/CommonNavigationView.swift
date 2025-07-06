@@ -4,7 +4,7 @@ final class CommonNavigationView: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .pretendard(size: 22, weight: .bold)
-        label.textColor = .black100
+        label.textColor = .textPrimary
         label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         return label
     }()
