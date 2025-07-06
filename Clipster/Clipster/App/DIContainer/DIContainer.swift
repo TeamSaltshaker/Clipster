@@ -242,7 +242,7 @@ final class DIContainer {
     }
 
     func makeFetchSavePathLayoutOptionUseCase() -> FetchSavePathLayoutOptionUseCase {
-        DefaultFetchSavePathLayoutOptionUseCase()
+        DefaultFetchSavePathLayoutOptionUseCase(userDefaults: userDefaults)
     }
 
     func makeParseURLUseCase() -> ParseURLUseCase {
@@ -400,7 +400,9 @@ final class DIContainer {
 
     func makeMyPageReactor() -> MyPageReactor {
         MyPageReactor(
+            checkLoginStatusUseCase: makeCheckLoginStatusUseCase(),
             loginUseCase: makeLoginUseCase(),
+            fetchCurrentUserUseCase: makeFetchCurrentUserUseCase(),
             fetchThemeUseCase: makeFetchThemeUseCase(),
             fetchFolderSortUseCase: makeFetchFolderSortOptionUseCase(),
             fetchClipSortUseCase: makeFetchClipSortOptionUseCase(),
@@ -410,7 +412,8 @@ final class DIContainer {
             saveThemeOptionUseCase: makeSaveThemeUseCase(),
             saveSavePathLayoutOptionUseCase: makeSaveSavePathLayoutOptionUseCase(),
             saveFolderSortOptionUseCase: makeSaveFolderSortUseCase(),
-            saveClipSortOptionUseCase: makeSaveClipSortUseCase()
+            saveClipSortOptionUseCase: makeSaveClipSortUseCase(),
+            updateNicknameUseCase: makeUpdateNicknameUseCase()
         )
     }
 }

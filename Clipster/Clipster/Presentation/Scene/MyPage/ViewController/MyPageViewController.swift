@@ -114,8 +114,13 @@ extension MyPageViewController {
                 guard let self else { return }
 
                 switch route {
-                case .showEditNickName:
-                    break
+                case .showEditNickName(let nickname):
+                    coordinator?.editNickname(
+                        nickname: nickname
+                    ) { [weak self] changedNickname in
+                        self?.reactor?.action.onNext(.changeNickName(changedNickname))
+                    }
+
                 case .showSelectTheme(let currentOption, let availableOptions):
                     coordinator?.showSelectTheme(
                         current: currentOption,
