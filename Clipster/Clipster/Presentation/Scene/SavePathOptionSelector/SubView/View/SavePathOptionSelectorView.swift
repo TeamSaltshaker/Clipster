@@ -11,16 +11,22 @@ final class SavePathOptionSelectorView: UIView {
     let action = PublishRelay<Action>()
     private let disposeBag = DisposeBag()
 
+    private let baseBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .cell
+        return view
+    }()
+
     private let grabberView: UIView = {
         let view = UIView()
-        view.backgroundColor = .black50
+        view.backgroundColor = .textPrimary
         view.layer.cornerRadius = 2.5
         return view
     }()
 
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black100
+        label.textColor = .textPrimary
         label.text = "저장 경로 보기"
         label.font = .pretendard(size: 16, weight: .semiBold)
         return label
@@ -28,7 +34,7 @@ final class SavePathOptionSelectorView: UIView {
 
     private let separatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = .black800
+        view.backgroundColor = .textTertiary
         return view
     }()
 
@@ -76,11 +82,12 @@ private extension SavePathOptionSelectorView {
     }
 
     func setAttributes() {
-        backgroundColor = .white900
+        backgroundColor = .background
     }
 
     func setHierarchy() {
         [
+            baseBackgroundView,
             grabberView,
             titleLabel,
             separatorView,
@@ -90,6 +97,10 @@ private extension SavePathOptionSelectorView {
     }
 
     func setConstraints() {
+        baseBackgroundView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
         grabberView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(8)
             make.width.equalTo(134)

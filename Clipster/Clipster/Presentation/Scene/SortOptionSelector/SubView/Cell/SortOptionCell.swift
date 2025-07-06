@@ -4,7 +4,7 @@ import UIKit
 final class SortOptionCell: UITableViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black100
+        label.textColor = .textPrimary
         label.font = .pretendard(size: 16, weight: .regular)
         return label
     }()
@@ -27,7 +27,7 @@ final class SortOptionCell: UITableViewCell {
 
     func setDisplay(title: String, isSelected: Bool, isAscending: Bool) {
         titleLabel.text = title
-        titleLabel.textColor = isSelected ? .blue500 : .black100
+        titleLabel.textColor = isSelected ? .appPrimary : .textPrimary
         chevronImageView.isHidden = !isSelected
         chevronImageView.image = isAscending ? .chevronUpBlue: .chevronDownBlue
     }
@@ -41,7 +41,8 @@ private extension SortOptionCell {
     }
 
     func setAttributes() {
-        contentView.backgroundColor = .white900
+        backgroundColor = .background
+        contentView.backgroundColor = .cell
     }
 
     func setHierarchy() {

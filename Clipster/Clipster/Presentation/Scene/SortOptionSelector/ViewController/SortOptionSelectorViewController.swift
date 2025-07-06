@@ -13,23 +13,29 @@ final class SortOptionSelectorViewController<Option: SortableOption>: UIViewCont
     private let onSelect: (Option) -> Void
     private var dataSource: UITableViewDiffableDataSource<Section, Item>?
 
+    private let baseBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .cell
+        return view
+    }()
+
     private let grabberView: UIView = {
         let view = UIView()
-        view.backgroundColor = .black50
+        view.backgroundColor = .textPrimary
         view.layer.cornerRadius = 2.5
         return view
     }()
 
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black100
+        label.textColor = .textPrimary
         label.font = .pretendard(size: 16, weight: .semiBold)
         return label
     }()
 
     private let separatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = .black800
+        view.backgroundColor = .textTertiary
         return view
     }()
 
@@ -81,6 +87,7 @@ final class SortOptionSelectorViewController<Option: SortableOption>: UIViewCont
                 isSelected: isSelected,
                 isAscending: item.isAscending
             )
+            cell.selectionStyle = .none
             return cell
         }
     }
@@ -124,11 +131,12 @@ private extension SortOptionSelectorViewController {
     }
 
     func setAttributes() {
-        view.backgroundColor = .white900
+        view.backgroundColor = .background
     }
 
     func setHierarchy() {
         [
+            baseBackgroundView,
             grabberView,
             titleLabel,
             separatorView,
@@ -137,6 +145,10 @@ private extension SortOptionSelectorViewController {
     }
 
     func setConstraints() {
+        baseBackgroundView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
         grabberView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(8)
             make.width.equalTo(134)

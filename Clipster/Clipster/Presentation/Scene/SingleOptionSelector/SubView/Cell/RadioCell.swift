@@ -26,7 +26,8 @@ private extension RadioCell {
     }
 
     func setAttributes() {
-        contentView.backgroundColor = .white900
+        backgroundColor = .background
+        contentView.backgroundColor = .cell
     }
 
     func setHierarchy() {
