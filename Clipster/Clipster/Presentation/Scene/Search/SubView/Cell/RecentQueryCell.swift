@@ -14,7 +14,7 @@ final class RecentQueryCell: UICollectionViewCell {
 
     let deleteButton: UIButton = {
         let button = UIButton()
-        button.setImage(.xGray, for: .normal)
+        button.setImage(.xGray.withTintColor(.secondaryLabel), for: .normal)
         return button
     }()
 
@@ -32,6 +32,14 @@ final class RecentQueryCell: UICollectionViewCell {
         disposeBag = DisposeBag()
     }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            contentView.layer.applyDynamicBorderColor(color: .dialogueStroke, for: traitCollection)
+        }
+    }
+
     func setDisplay(_ query: String) {
         queryLabel.text = query
     }
@@ -45,10 +53,11 @@ private extension RecentQueryCell {
     }
 
     func setAttributes() {
-        contentView.backgroundColor = .clear
+        backgroundColor = .background
+        contentView.backgroundColor = .cell
         contentView.layer.borderWidth = 1
         contentView.layer.cornerRadius = 8
-        contentView.layer.borderColor = UIColor.black800.cgColor
+        contentView.layer.borderColor = UIColor.textTertiary.cgColor
     }
 
     func setHierarchy() {

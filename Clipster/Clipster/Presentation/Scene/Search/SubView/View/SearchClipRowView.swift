@@ -7,28 +7,28 @@ final class SearchClipRowView: UIView {
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 8
         imageView.clipsToBounds = true
-        imageView.backgroundColor = .gray
+        imageView.backgroundColor = .black800
         return imageView
     }()
 
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .pretendard(size: 16, weight: .semiBold)
-        label.textColor = .black100
+        label.textColor = .textPrimary
         return label
     }()
 
     private let memoLabel: UILabel = {
         let label = UILabel()
         label.font = .pretendard(size: 12, weight: .regular)
-        label.textColor = .black100
+        label.textColor = .textPrimary
         return label
     }()
 
     private let urlLabel: UILabel = {
         let label = UILabel()
         label.font = .pretendard(size: 12, weight: .regular)
-        label.textColor = .black500
+        label.textColor = .textSecondary
         return label
     }()
 
@@ -52,12 +52,12 @@ final class SearchClipRowView: UIView {
         }
 
         let title = clip.urlMetadata.title
-        let memo = clip.memo
+        let memo = clip.isShowSubTitle ? clip.subTitle : clip.memo
         let url = clip.urlMetadata.url.absoluteString
         if !query.isEmpty {
-            titleLabel.attributedText = title.highlight(query: query, foregroundColor: .black100, font: .pretendard(size: 16, weight: .semiBold))
-            memoLabel.attributedText = memo.highlight(query: query, foregroundColor: .black100, font: .pretendard(size: 12, weight: .regular))
-            urlLabel.attributedText = url.highlight(query: query, foregroundColor: .black500, font: .pretendard(size: 12, weight: .regular))
+            titleLabel.attributedText = title.highlight(query: query, foregroundColor: .textPrimary, font: .pretendard(size: 16, weight: .semiBold))
+            memoLabel.attributedText = memo.highlight(query: query, foregroundColor: .textPrimary, font: .pretendard(size: 12, weight: .regular))
+            urlLabel.attributedText = url.highlight(query: query, foregroundColor: .textSecondary, font: .pretendard(size: 12, weight: .regular))
         } else {
             titleLabel.text = title
             memoLabel.text = memo
@@ -74,7 +74,7 @@ private extension SearchClipRowView {
     }
 
     func setAttributes() {
-        backgroundColor = .white900
+        backgroundColor = .clear
     }
 
     func setHierarchy() {
