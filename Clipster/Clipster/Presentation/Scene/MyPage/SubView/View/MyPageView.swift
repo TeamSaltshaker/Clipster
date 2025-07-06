@@ -332,7 +332,7 @@ private extension MyPageView {
     }
 
     func setAttributes() {
-        backgroundColor = .white800
+        backgroundColor = .background
     }
 
     func setHierarchy() {

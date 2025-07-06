@@ -1,3 +1,5 @@
+import UIKit
+
 extension ThemeOption {
     var displayText: String {
         switch self {
@@ -9,3 +11,13 @@ extension ThemeOption {
 }
 
 extension ThemeOption: SelectableOption { }
+
+extension ThemeOption {
+    var interfaceStyle: UIUserInterfaceStyle {
+        switch self {
+        case .system: return .unspecified
+        case .light: return .light
+        case .dark: return .dark
+        }
+    }
+}

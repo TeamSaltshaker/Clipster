@@ -12,7 +12,7 @@ final class LoginCell: UICollectionViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .pretendard(size: 14, weight: .semiBold)
-        label.textColor = .black100
+        label.textColor = .textPrimary
         return label
     }()
 
@@ -38,6 +38,14 @@ final class LoginCell: UICollectionViewCell {
         imageView.image = nil
     }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            contentView.layer.applyDynamicBorderColor(color: .dialogueStroke, for: traitCollection)
+        }
+    }
+
     func setDisplay(_ login: LoginType) {
         imageView.image = login.icon
         titleLabel.text = login.title
@@ -52,9 +60,10 @@ private extension LoginCell {
     }
 
     func setAttributes() {
-        contentView.backgroundColor = .white900
+        backgroundColor = .background
+        contentView.backgroundColor = .cell
         contentView.layer.cornerRadius = 24
-        contentView.layer.borderColor = UIColor.black900.cgColor
+        contentView.layer.borderColor = UIColor.dialogueStroke.cgColor
         contentView.layer.borderWidth = 1
     }
 

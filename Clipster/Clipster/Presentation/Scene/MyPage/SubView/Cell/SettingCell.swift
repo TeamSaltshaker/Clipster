@@ -71,7 +71,8 @@ private extension SettingCell {
     }
 
     func setAttributes() {
-        contentView.backgroundColor = .white900
+        backgroundColor = .background
+        contentView.backgroundColor = .cell
     }
 
     func setHierarchy() {
