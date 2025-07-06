@@ -10,7 +10,7 @@ final class URLValidationStackView: UIStackView {
 
     let statusLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black500
+        label.textColor = .textSecondary
         label.font = .pretendard(size: 12, weight: .regular)
         label.text = " "
         return label
@@ -19,6 +19,7 @@ final class URLValidationStackView: UIStackView {
     let activityIndicatorView: UIActivityIndicatorView = {
         let activityIndicatorView = UIActivityIndicatorView(style: .medium)
         activityIndicatorView.hidesWhenStopped = true
+        activityIndicatorView.color = .textPrimary
         return activityIndicatorView
     }()
 
