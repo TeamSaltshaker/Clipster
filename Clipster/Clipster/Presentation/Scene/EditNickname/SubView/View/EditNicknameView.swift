@@ -12,16 +12,22 @@ final class EditNicknameView: UIView {
     let action = PublishRelay<Action>()
     private let disposeBag = DisposeBag()
 
+    private let baseBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .cell
+        return view
+    }()
+
     private let grabberView: UIView = {
         let view = UIView()
-        view.backgroundColor = .black50
+        view.backgroundColor = .textPrimary
         view.layer.cornerRadius = 2.5
         return view
     }()
 
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black100
+        label.textColor = .textPrimary
         label.text = "닉네임 변경"
         label.font = .pretendard(size: 16, weight: .semiBold)
         return label
@@ -40,7 +46,7 @@ final class EditNicknameView: UIView {
         view.backgroundColor = .clear
         view.layer.cornerRadius = 20
         view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.black800.cgColor
+        view.layer.borderColor = UIColor.textTertiary.cgColor
         return view
     }()
 
@@ -90,7 +96,7 @@ private extension EditNicknameView {
     }
 
     func setAttributes() {
-        backgroundColor = .white900
+        backgroundColor = .background
     }
 
     func setHierarchy() {
@@ -100,6 +106,7 @@ private extension EditNicknameView {
         ].forEach { containerView.addSubview($0) }
 
         [
+            baseBackgroundView,
             grabberView,
             titleLabel,
             saveButton,
@@ -109,6 +116,10 @@ private extension EditNicknameView {
     }
 
     func setConstraints() {
+        baseBackgroundView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
         grabberView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(8)
             make.width.equalTo(134)
