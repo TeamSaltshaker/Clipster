@@ -36,7 +36,7 @@ final class ClipListCell: UICollectionViewListCell {
 
     private let visitIndicatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = .blue600
+        view.backgroundColor = .appPrimary
         view.layer.cornerRadius = 4
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor.white900.cgColor

@@ -53,7 +53,7 @@ final class HomeView: UIView {
         let font = UIFont(name: "locus_sangsang", size: 28) ?? UIFont.boldSystemFont(ofSize: 28)
         let attributedText = NSMutableAttributedString(string: text)
         attributedText.addAttributes([
-            .foregroundColor: UIColor.blue600,
+            .foregroundColor: UIColor.appPrimary,
             .font: font
         ], range: NSRange(location: 0, length: 1))
 

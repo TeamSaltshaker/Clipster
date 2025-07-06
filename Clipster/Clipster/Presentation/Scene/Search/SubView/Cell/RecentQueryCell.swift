@@ -8,7 +8,7 @@ final class RecentQueryCell: UICollectionViewCell {
     let queryLabel: UILabel = {
         let label = UILabel()
         label.font = .pretendard(size: 14, weight: .regular)
-        label.textColor = .blue600
+        label.textColor = .appPrimary
         return label
     }()
 

@@ -181,7 +181,7 @@ final class ShareReactor: Reactor {
                 newState.urlValidationImageResource = .checkBlue
                 newState.urlValidationLabelText = "올바른 URL 입니다."
                 if !currentState.urlString.isEmpty {
-                    newState.urlTextFieldBorderColor = .blue600
+                    newState.urlTextFieldBorderColor = .appPrimary
                 }
             case .validWithWarning:
                 newState.isURLValid = true

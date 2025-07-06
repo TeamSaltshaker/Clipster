@@ -5,7 +5,7 @@ final class OnboardingCell: UICollectionViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .pretendard(size: 22, weight: .bold)
-        label.textColor = .blue600
+        label.textColor = .appPrimary
         label.textAlignment = .center
         return label
     }()

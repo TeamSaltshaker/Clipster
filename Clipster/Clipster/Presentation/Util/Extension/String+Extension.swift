@@ -17,7 +17,7 @@ extension String {
         let matches = regex.matches(in: self, options: [], range: NSRange(location: 0, length: self.utf16.count))
 
         for match in matches {
-            attributedString.addAttribute(.foregroundColor, value: UIColor.blue600, range: match.range)
+            attributedString.addAttribute(.foregroundColor, value: UIColor.appPrimary, range: match.range)
         }
 
         return attributedString

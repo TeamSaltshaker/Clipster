@@ -44,7 +44,7 @@ final class OnboardingViewController: UIViewController {
 
     private lazy var skipButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitleColor(.blue600, for: .normal)
+        button.setTitleColor(.appPrimary, for: .normal)
         button.setTitle("Skip", for: .normal)
         button.titleLabel?.font = .pretendard(size: 14, weight: .medium)
         button.addTarget(self, action: #selector(didTapStart), for: .touchUpInside)
@@ -65,7 +65,7 @@ final class OnboardingViewController: UIViewController {
         let pageControl = UIPageControl()
         pageControl.numberOfPages = items.count
         pageControl.currentPage = 0
-        pageControl.currentPageIndicatorTintColor = .blue600
+        pageControl.currentPageIndicatorTintColor = .appPrimary
         pageControl.pageIndicatorTintColor = .blue900
         pageControl.isUserInteractionEnabled = false
         return pageControl
